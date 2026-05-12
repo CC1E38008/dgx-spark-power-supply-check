@@ -39,6 +39,44 @@
 
 ---
 
+## 📄 日志
+所有事件记录在 /var/log/power_supply_check.log：
+
+INFO - 网络监控脚本启动
+
+---
+
+## 🧪 工作流程
+text
+┌───────────┐
+│ 等待 ≥ 2s │
+└─────┬─────┘
+      ▼
+┌──────────────────────┐
+│ ping 内网 IP ×1      │
+│ ping 公网 IP ×1      │
+└─────┬────────┬───────┘
+      ▼        ▼
+至少一个通? ──── 是 → 循环继续
+      │ 否
+      ▼
+┌──────────────────────┐
+│ ping 内网 IP ×2      │
+│ ping 公网 IP ×2      │
+└─────┬────────┬───────┘
+      ▼        ▼
+至少一个通? ──── 是 → 循环继续
+      │ 否
+      ▼
+  执行 sudo halt
+
+
+---
+  
+## ⚠️ 注意事项
+
+---
+
 ## 🚀 快速开始
 
 ### 1. 下载脚本
@@ -85,10 +123,7 @@ WantedBy=multi-user.target
 bash
 sudo systemctl daemon-reload
 sudo systemctl enable --now network-watchdog.service
-## 📄 日志
-所有事件记录在 /var/log/power_supply_check.log：
 
-INFO - 网络监控脚本启动
 
 CRITICAL - 两次 ping 都失败，执行关机
 
