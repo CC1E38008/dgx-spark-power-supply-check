@@ -91,19 +91,23 @@ curl -O https://raw.githubusercontent.com/你的用户名/仓库名/main/network
 chmod +x network_watchdog.py
 
 ### 2. 修改监控目标（可选）
-编辑脚本中的两个 IP：
 
+```bash
+编辑脚本中的两个 IP：
 python
 IP_target_lan = '192.168.0.254'        # 内网 IP，例如路由器/光猫/网关
 IP_target_wan = '114.114.114.114'      # 公网 IP，确保能 ping 通
+
 ### 3. 配置免密码关机（若非 root 运行）
-bash
+
+```bash
 sudo visudo -f /etc/sudoers.d/network_watchdog
 添加以下行（假设脚本由用户 pi 运行）：
-
-text
 pi ALL=(ALL) NOPASSWD: /sbin/halt
+
 ### 4. 注册为 systemd 服务（推荐）
+
+```bash
 创建服务文件 /etc/systemd/system/network-watchdog.service：
 
 ini
