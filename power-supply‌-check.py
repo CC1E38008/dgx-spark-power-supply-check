@@ -49,7 +49,7 @@ def main():
 
             if not success_ip1 and not success_ip2:
                 logging.critical("两次 ping 都失败，执行关机")
-                subprocess.run(['sudo', 'poweroff'])
+                subprocess.run(['poweroff'])
 
         # 确保每轮检测间隔至少 2 秒
         elapsed = time.time() - start_time
